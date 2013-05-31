@@ -14,7 +14,9 @@
 #import "QBImagePickerAssetCell.h"
 #import "QBImagePickerFooterView.h"
 
-@interface QBAssetCollectionViewController ()
+@interface QBAssetCollectionViewController (){
+    BOOL _hasLoad;
+}
 
 @property (nonatomic, retain) NSMutableArray *assets;
 @property (nonatomic, retain) NSMutableOrderedSet *selectedAssets;
@@ -64,7 +66,10 @@
     [super viewWillAppear:animated];
     
     // Reload
-    [self reloadData];
+    if(!_hasLoad){
+        [self reloadData];
+        _hasLoad=YES;
+    }
     
     if(self.fullScreenLayoutEnabled) {
         // Set bar styles
